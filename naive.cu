@@ -48,11 +48,10 @@ int main(int argc, char const *argv[])
     int block_x = atoi(argv[2]);
     int block_y = atoi(argv[3]);
 
-
     // initialize matrices A, B, C of size NxN
-    float* A = (float*) malloc(N * N * sizeof(float));
-    float* B = (float*) malloc(N * N * sizeof(float));
-    float* C = (float*) malloc(N * N * sizeof(float));
+    float* A = (float*) malloc(N*N*sizeof(float));
+    float* B = (float*) malloc(N*N*sizeof(float));
+    float* C = (float*) malloc(N*N*sizeof(float));
 
     // fill matrices with random values
     for (int i = 0; i < N; i++)
