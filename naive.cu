@@ -6,6 +6,7 @@
 
 #define MAX_NUM 10
 #define MIN_NUM -10
+#define BLOCK_WIDTH 16
 
 using namespace std;
 
@@ -39,20 +40,19 @@ __global__ void sq_mat_mul_kernel_naive(float* A, float* B, float* C, int N)
 
 int main(int argc, char const *argv[])
 {
-    if (argc < 4) {
-        cout << "Usage: " << argv[0] << " <matrix_size> <block_x> <block_y>\n";
+    if (argc < 2) {
+        cout << "Usage: " << argv[0] << " <matrix_size>\n";
         return 1;
     }
 
     int N = atoi(argv[1]);
-    int block_x = atoi(argv[2]);
-    int block_y = atoi(argv[3]);
 
     // initialize matrices A, B, C of size NxN
     float* A = (float*) malloc(N*N*sizeof(float));
     float* B = (float*) malloc(N*N*sizeof(float));
     float* C = (float*) malloc(N*N*sizeof(float));
 
+    srand(time(0));
     // fill matrices with random values
     for (int i = 0; i < N; i++)
     {
@@ -78,8 +78,8 @@ int main(int argc, char const *argv[])
     CUDA_CHECK(cudaMemcpy(d_B, B, N*N*sizeof(float), cudaMemcpyHostToDevice));
 
     // block size (x, y, z)
-    dim3 dimBlock(block_x, block_y, 1);
-    dim3 dimGrid((N + block_x - 1)/block_x, (N + block_y - 1)/block_y);
+    dim3 dimBlock(BLOCK_WIDTH, BLOCK_WIDTH, 1);
+    dim3 dimGrid((N + BLOCK_WIDTH - 1)/BLOCK_WIDTH, (N + BLOCK_WIDTH - 1)/BLOCK_WIDTH);
 
     float time;
     cudaEvent_t start;
