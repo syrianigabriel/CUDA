@@ -1,0 +1,20 @@
+NVCC = nvcc
+CFLAGS = -std=c++17 -O2
+INCLUDES = -Iinclude
+
+SRC = src/main.cu src/sgemm.cu kernels/naive_sgemm.cu kernels/tiled_sgemm.cu
+OBJ = $(SRC:.cu=.o)
+TARGET = sgemm
+
+all: $(TARGET)
+
+# Link step
+$(TARGET): $(OBJ)
+	$(NVCC) $(OBJ) -o $(TARGET)
+
+# Compile each .cu into .o
+%.o: %.cu
+	$(NVCC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+clean:
+	rm -f $(OBJ) $(TARGET)
