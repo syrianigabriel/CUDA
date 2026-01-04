@@ -23,7 +23,7 @@ __global__ void block_tiled_sgemm_kernel(const float* A, const float* B, float* 
     float sum = 0;
 
     // Split dot product into tiles
-    for (int phase = 0; phase < ceil((float) N/TILE_WIDTH); phase++)
+    for (int phase = 0; phase < (K + TILE_WIDTH - 1) / TILE_WIDTH; phase++)
     {
         // A (M x K) tiles move from left to right
         if (i < M && (phase*TILE_WIDTH+tx) < K)
