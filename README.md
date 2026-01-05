@@ -65,21 +65,26 @@ N,CuBLAS,UncoalescedNaive,CoalescedNaive,Tiled
 ./sgemm 1024 5 >> results/t4/sgemm.csv
 ```
 
-## Sample Results on NVIDIA T4
+## Sample Results on NVIDIA T4 (Time in ms)
 
 The table below shows the execution time in **milliseconds** for different SGEMM implementations on a NVIDIA T4 GPU. Matrix size `N` varies from 128 to 16384.
 
-| N      | CuBLAS   | UncoalescedNaive | CoalescedNaive | Tiled     |
-|--------|----------|-----------------|----------------|-----------|
-| 128    | 0.255661 | 0.147226        | 0.0471552      | 0.0390144 |
-| 256    | 0.301958 | 0.86391         | 0.179942       | 0.128429  |
-| 512    | 0.403264 | 6.24232         | 1.17416        | 0.766336  |
-| 1024   | 1.1716   | 37.1659         | 6.78271        | 4.26188   |
-| 2048   | 3.65073  | 159.023         | 29.7906        | 21.7178   |
-| 4096   | 27.9319  | 1170.06         | 297.243        | 195.311   |
-| 8192   | 308.78   | 10126.1         | 2640.2         | 1733.93   |
-| 16384  | 2106.67  | 102477          | 39194.4        | 16763.9   |
+<div align="center">
+
+|   N   | CuBLAS | UncoalescedNaive | CoalescedNaive | Tiled | RegisterTiled |
+|:-----:|:------:|:----------------:|:--------------:|:-----:|:-------------:|
+| 128   | 0.39184 | 0.158746 | 0.0564032 | 0.0513024 | 0.0390528 |
+| 256   | 0.299091 | 0.865568 | 0.178816 | 0.126118 | 0.0794368 |
+| 512   | 0.375008 | 6.23804 | 1.17023 | 0.76311 | 0.424973 |
+| 1024  | 1.26228 | 43.1346 | 8.1543 | 4.94571 | 2.26589 |
+| 2048  | 3.72529 | 158.281 | 30.2711 | 22.0071 | 12.2827 |
+| 4096  | 28.0095 | 1169.81 | 295.442 | 198.31 | 100.791 |
+| 8192  | 322.457 | 10131.6 | 2661.33 | 1737.64 | 841.347 |
+| 16384 | 2458.06 | 102501 | 39313.8 | 16691.8 | 7731.36 |
+
+</div>
 
 The chart below shows the corresponding **GFLOPS** achieved by each implementation. This highlights how performance scales with matrix size, with CuBLAS reaching its peak throughput for larger matrices due to reduced overhead and better kernel optimization.
 
 ![Benchmark GFLOPS](benchmark.png)
+
