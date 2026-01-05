@@ -74,10 +74,10 @@ int main(int argc, char const *argv[])
         CUDA_CHECK(cudaGetLastError());
         tiled_total += timer.stop();
 
-        timer.start();
-        sgemm(d_A, d_B, d_C, N, N, N, SgemmEnum::RegisterTiled);
-        CUDA_CHECK(cudaGetLastError());
-        register_tiled_total += timer.stop();
+        // timer.start();
+        // sgemm(d_A, d_B, d_C, N, N, N, SgemmEnum::RegisterTiled);
+        // CUDA_CHECK(cudaGetLastError());
+        // register_tiled_total += timer.stop();
     }
 
     std::cout << N << ","
@@ -85,7 +85,8 @@ int main(int argc, char const *argv[])
           << uncoalesced_naive_total / num_runs << ","
           << coalesced_naive_total / num_runs << ","
           << tiled_total / num_runs << ","
-          << register_tiled_total / num_runs << std::endl; 
+        //   << register_tiled_total / num_runs
+          << std::endl; 
 
     cudaFree(d_A);
     cudaFree(d_B);
