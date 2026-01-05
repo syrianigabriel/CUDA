@@ -67,6 +67,8 @@ N,CuBLAS,UncoalescedNaive,CoalescedNaive,Tiled
 
 ## Sample Results on NVIDIA T4
 
+The table below shows the execution time in **milliseconds** for different SGEMM implementations on a NVIDIA T4 GPU. Matrix size `N` varies from 128 to 16384.
+
 | N      | CuBLAS   | UncoalescedNaive | CoalescedNaive | Tiled     |
 |--------|----------|-----------------|----------------|-----------|
 | 128    | 0.255661 | 0.147226        | 0.0471552      | 0.0390144 |
@@ -77,3 +79,7 @@ N,CuBLAS,UncoalescedNaive,CoalescedNaive,Tiled
 | 4096   | 27.9319  | 1170.06         | 297.243        | 195.311   |
 | 8192   | 308.78   | 10126.1         | 2640.2         | 1733.93   |
 | 16384  | 2106.67  | 102477          | 39194.4        | 16763.9   |
+
+The chart below shows the corresponding **GFLOPS** achieved by each implementation. This highlights how performance scales with matrix size, with CuBLAS reaching its peak throughput for larger matrices due to reduced overhead and better kernel optimization.
+
+![Benchmark GFLOPS](benchmark.png)
