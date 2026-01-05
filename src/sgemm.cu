@@ -54,10 +54,10 @@ void sgemm(const float* A, const float* B, float* C, int M, int N, int K, SgemmE
 
             cublasDestroy(handle);
             break;
+        }
         case SgemmEnum::CPU:
             cpu_sgemm(A, B, C, M, N, K);
             break;
-        }
         default:
             throw std::runtime_error("Unsupported SGEMM kernel!");
     }
