@@ -1,6 +1,6 @@
 # CUDA SGEMM Benchmark
 
-This project allows you to benchmark different implementations of single-precision general matrix-matrix multiplication (SGEMM) on your own NVIDIA GPU using CUDA. You can test naive, coalesced, tiled, register-tiled, and cuBLAS kernels and see how performance scales with matrix size.
+This project allows you to benchmark and compare custom CUDA SGEMM implementations against NVIDIA cuBLAS on your own GPU, including naive, coalesced, tiled, and register-tiled kernels, and observe how performance scales with matrix size.
 
 ## Features
 
@@ -87,4 +87,5 @@ The table below shows the execution time in **milliseconds** for different SGEMM
 The chart below shows the corresponding **GFLOPS** achieved by each implementation. This highlights how performance scales with matrix size, with CuBLAS reaching its peak throughput for larger matrices due to reduced overhead and better kernel optimization.
 
 ![Benchmark GFLOPS](benchmark.png)
+
 
